@@ -1,0 +1,25 @@
+server:
+  AppVersion: 1.0.0
+  Port: :8080
+  Mode: Development
+  JwtSecretKey: secretkey
+  ReadTimeout: 5
+  WriteTimeout: 5
+  Debug: true
+
+postgres:
+  PostgresqlHost: clean_architecture_db_postgesql
+  PostgresqlPort: 5432
+  PostgresqlUser: test
+  PostgresqlPassword: 12345678
+  PostgresqlDbname: clean_architecture
+  PostgresqlSslmode: false
+  PostgresqlTimezone: UTC
+
+mysql:
+  MySQLHost: clean_architecture_db_mysql
+  MySQLPort: 3306
+  MySQLUser: test
+  MySQLPassword: 12345678
+  MySQLDbname: clean_architecture
+  MySQLSSLMode: false

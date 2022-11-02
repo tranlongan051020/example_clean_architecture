@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: clean_architecture_api
+    build:
+      context: .
+      dockerfile: build/docker/Dockerfile
+    command: /app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgesql
+      - mysql
+    restart: always
+    # volumes:
+    #   - ../../:/app
+    networks:
+      - app_network
+
+  postgesql:
+    image: postgres:12-alpine
+    container_name: clean_architecture_db_postgesql
+    ports:
+      - "5433:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=clean_architecture
+    # volumes:
+    #   - ../../db/pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  mysql:
+    image: mysql:8-debian
+    container_name: clean_architecture_db_mysql
+    ports:
+      - "3307:3306"
+    restart: always
+    environment:
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_DATABASE=clean_architecture
+    # volumes:
+    #   - ../../db/mysqldata:/var/lib/mysql
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
